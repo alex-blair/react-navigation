@@ -23,6 +23,12 @@ const routeConfig = {
   },
 };
 
+const style = {
+  backgroundColor: 'white',
+  borderBottomWidth: 1,
+  borderBottomColor: 'black',
+};
+
 describe('StackNavigator', () => {
   it('renders successfully', () => {
     const MyStackNavigator = StackNavigator(routeConfig);
@@ -37,6 +43,20 @@ describe('StackNavigator', () => {
         screen: HomeScreen,
         navigationOptions: {
           headerRight: <View />,
+        },
+      },
+    });
+    const rendered = renderer.create(<MyStackNavigator />).toJSON();
+
+    expect(rendered).toMatchSnapshot();
+  });
+
+  it('applies correct values when safeAreaStyle is present', () => {
+    const MyStackNavigator = StackNavigator({
+      Home: {
+        screen: HomeScreen,
+        navigationOptions: {
+          safeAreaStyle: style,
         },
       },
     });
